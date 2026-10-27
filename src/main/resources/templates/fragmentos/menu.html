@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <nav th:fragment="menu" class="menu">
+            <button class="dropbtn" th:href="@{/}"> Inicio </button>
+            <div class="dropdown">
+                <button class="dropbtn"> Videojuegos </button>
+                <div class="dropdown-content">
+                    <a th:href="@{/videojuegos/listadoAlumnos}"> Listar Alumnos </a>
+                    <a th:href="@{/videojuegos/insertarAlumno}"> Insertar Alumnos </a>
+                    <a th:href="@{/videojuegos/formularioActualizarAlumnos}"> Modificar Alumnos </a>
+                    <a th:href="@{/videojuegos/formularioBorrarAlumnos}"> Borrar Alumnos </a>
+                </div>
+            </div>
+        </nav>
+    </body>
+</html>
