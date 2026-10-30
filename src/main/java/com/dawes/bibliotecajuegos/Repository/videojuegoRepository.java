@@ -22,7 +22,7 @@ public class videojuegoRepository {
         this.dataSource = dataSource;
     }
 
-    public ArrayList<videojuegoDTO> listarVideojuego(String titulo, Integer anio_lanzamiento, Integer pegi, Integer id_desarrolladora) {
+    public ArrayList<videojuegoDTO> buscarVideojuego(String titulo, Integer anio_lanzamiento, Integer pegi, Integer id_desarrolladora) {
 
         String sql = "SELECT v.titulo, v.anio_lanzamiento, v.pegi, d.id_desarrolladora " +
                 "FROM videojuego v JOIN desarrolladora d ON v.id_desarrolladora = d.nombre" +
@@ -31,7 +31,7 @@ public class videojuegoRepository {
         ArrayList<videojuegoDTO> listaVideojuegos = new ArrayList<>();
         Connection connection = null;
 
-        try{
+        try {
             connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -43,13 +43,14 @@ public class videojuegoRepository {
             logger.debug("Query a ejecutar: {}", ps);
 
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+
+            while (rs.next()) {
                 listaVideojuegos.add(mapearVideojuego(rs));
             }
 
             connection.close();
 
-        }catch(SQLException e){
+        } catch (SQLException e) {
             logger.error("Error al listar los videojuegos: " + e.getMessage());
             cerrarConexion(connection);
         }
@@ -76,5 +77,4 @@ public class videojuegoRepository {
             }
         }
     }
-
 }
